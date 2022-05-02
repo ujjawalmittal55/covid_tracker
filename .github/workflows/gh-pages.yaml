@@ -3,9 +3,6 @@ on:
   push:
     branches:
       - main
-with:
-  github_token: ${{ secrets.GITHUB_TOKEN }}
-  publish_dir: ./build
 jobs:
   deploy:
     runs-on: ubuntu-20.04
