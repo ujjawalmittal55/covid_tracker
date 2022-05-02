@@ -73,9 +73,8 @@ function App() {
       </div>
       <Card className="app_right">
         <CardContent>
-          <h3>world wide Cases</h3>
+          <h3>World wide cases</h3>
           <Table countries={tableData}/>
-          <h3>hello</h3>    
           <LineGraph casesType="cases"/>
         </CardContent>
       </Card>

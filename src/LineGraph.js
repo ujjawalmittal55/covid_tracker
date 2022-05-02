@@ -1,6 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
+import { Chart } from 'chart.js'
+import {CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
 import numeral from "numeral";
+
+Chart.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const options = {
   legend: {
@@ -21,30 +33,6 @@ const options = {
       },
     },
   },
-  scales: {
-    xAxes: [
-      {
-        type: "time",
-        time: {
-          format: "MM/DD/YY",
-          tooltipFormat: "ll",
-        },
-      },
-    ],
-    yAxes: [
-      {
-        gridLines: {
-          display: false,
-        },
-        ticks: {
-          // Include a dollar sign in the ticks
-          callback: function (value, index, values) {
-            return numeral(value).format("0a");
-          },
-        },
-      },
-    ],
-  },
 };
 
 const buildChartData = (data, casesType) => {
@@ -64,7 +52,7 @@ const buildChartData = (data, casesType) => {
 };
 
 function LineGraph({ casesType }) {
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,8 +62,8 @@ function LineGraph({ casesType }) {
         })
         .then((data) => {
           let chartData = buildChartData(data, casesType);
-          setData(chartData);
           console.log(chartData);
+          setData(chartData);
           // buildChart(chartData);
         });
     };
